@@ -1,2 +1,2 @@
 # gobisect
-Generic tool for bisection to efficiently find "the point" where "changes" happened
+A tool that can be used to find the "point" where "changes" were introduced by executing arbitrary commands
