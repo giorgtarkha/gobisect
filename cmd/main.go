@@ -42,17 +42,25 @@ func main() {
 				Usage:       "if more than 1 worker is provided, multiple point executions will happen at once to possibly find the result faster.",
 				DefaultText: "1",
 			},
+			&cli.BoolFlag{
+				Name:        "more-weight-right",
+				Aliases:     []string{"mwr"},
+				Value:       false,
+				Usage:       "if more weight is put on right, the binary search will prioritize going to the right first.",
+				DefaultText: "false",
+			},
 		},
 		Action: func(ctx context.Context, c *cli.Command) error {
 			bisect, err := NewBisect(&BisectParams{
-				Cmd:     c.String("cmd"),
-				Points:  c.StringSlice("point"),
-				Workers: int(c.Int("workers")),
+				Cmd:             c.String("cmd"),
+				Points:          c.StringSlice("point"),
+				Workers:         int(c.Int("workers")),
+				MoreWeightRight: c.Bool("more-weight-right"),
 			})
 			if err != nil {
 				return err
 			}
-			return bisect.run()
+			return bisect.Run()
 		},
 	}
 
